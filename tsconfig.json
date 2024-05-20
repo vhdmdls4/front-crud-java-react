@@ -7,8 +7,13 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/errors/*": ["src/errors/*"],
+      "@/types/*": ["src/types/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/components/*": ["src/components/*"]
     },
+    
 
     /* Bundler mode */
     "moduleResolution": "bundler",
