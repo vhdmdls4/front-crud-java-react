@@ -18,30 +18,31 @@ import Login from "@/app/login/Login";
 export const router = createBrowserRouter(
   createRoutesFromElements(
     //father route can be used to define a layout for the app
-    <Route
-      element={
-        <>
-          can be a navbar or a sidebar
-          <Outlet />
-        </>
-      }
-    >
-      <Route path="/" element={<Home />} errorElement={<GenericErrorPage />} />
-      <Route
-        path="/login"
-        // loader={({ params }: any) => {
-        //   console.log(params["lang"]);
-        //   //should return value
-        //   return null;
-        // }}
-        // action={() => {
-        //   return null;
-        // }}
-        // <Route path="/project/task?/:taskId" />
-        element={<Login />}
-        errorElement={<GenericErrorPage />}
-      />
-    </Route>
+    <>
+      <Route>
+        <Route
+          path="/login"
+          // loader={({ params }: any) => {
+          //   console.log(params["lang"]);
+          //   //should return value
+          //   return null;
+          // }}
+          // action={() => {
+          //   return null;
+          // }}
+          // <Route path="/project/task?/:taskId" />
+          element={<Login />}
+          errorElement={<GenericErrorPage />}
+        />
+      </Route>
+      <Route>
+        <Route
+          path="/"
+          element={<Home />}
+          errorElement={<GenericErrorPage />}
+        />
+      </Route>
+    </>
   )
 );
 //example of nested routes
