@@ -3,6 +3,7 @@ export default function Home() {
     <div>
       Home principal da aplicação
       <>Teste novamente</>
+      <span>Testo</span>
     </div>
   );
 }
