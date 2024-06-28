@@ -1,4 +1,5 @@
 import {
+  Link,
   Outlet,
   Route,
   createBrowserRouter,
@@ -31,6 +32,7 @@ export const router = createBrowserRouter(
           //   return null;
           // }}
           // <Route path="/project/task?/:taskId" />
+
           element={<Login />}
           errorElement={<GenericErrorPage />}
         />
@@ -40,6 +42,9 @@ export const router = createBrowserRouter(
           path="/"
           element={<Home />}
           errorElement={<GenericErrorPage />}
+          // handle={{
+          //   crumb: () => <Link to="/login">Messages</Link>,
+          // }}
         />
       </Route>
     </>

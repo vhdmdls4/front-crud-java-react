@@ -10,7 +10,6 @@ import {
   Typography,
   makeStyles,
 } from "@mui/material";
-import { useState } from "react";
 import theme from "../Theme";
 
 function useStyles(theme: Theme) {
