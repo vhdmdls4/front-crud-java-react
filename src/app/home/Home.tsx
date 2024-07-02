@@ -1,15 +1,57 @@
-import { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
+
+interface FetchedCatsProps {
+  shouldFetch: boolean;
+  setOk: React.Dispatch<boolean>;
+}
+
+function FetchedCats({ shouldFetch, setOk }: FetchedCatsProps) {
+  const [testingEffect, setTestingEffect] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    if (shouldFetch) {
+      fetchCats();
+    }
+
+    // return () => {
+    //   second
+    // }
+  }, [shouldFetch]);
+
+  async function fetchCats() {
+    setTestingEffect([]);
+    try {
+      const response = await fetch("https://catfact.ninja/breeds");
+      const data = await response.json().then((res) => res.data);
+
+      await new Promise((resolve, reject) => {
+        setTimeout(resolve, 2000);
+      });
+
+      setTestingEffect(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setOk(false);
+      alert("finalizou");
+    }
+  }
+
+  if (testingEffect.length !== 0) {
+    return (
+      <div style={{ background: "#000", color: "white" }}>
+        Testando efeito
+        <div>{testingEffect[1]?.title}</div>{" "}
+        <div>{testingEffect[0]?.title}</div>
+      </div>
+    );
+  }
+}
 
 export default function Home() {
   const [price, setPrice] = useState<number>(0);
-  const [testingEffect, setTestingEffect] = useState<Array<any>>([]);
-
-  async function logMovies() {
-    const response = await fetch("http://example.com/movies.json");
-    const movies = await response.json();
-    setTestingEffect(movies);
-    console.log(movies);
-  }
+  const [ok, setOk] = useState<boolean>(false);
 
   const discount = 0.1;
 
@@ -20,6 +62,10 @@ export default function Home() {
   function applyDiscount(price: number, discount: number) {
     const discountedPrice = price - price * discount;
     setPrice(discountedPrice);
+  }
+
+  function shouldFetch() {
+    setOk(true);
   }
 
   return (
@@ -36,15 +82,17 @@ export default function Home() {
       >
         Click to apply discount
       </button>
-      <button onClick={logMovies}>Clique para fazer a busca</button>
-      <Suspense fallback={<div>Loading...</div>}>
-        {testingEffect?.length > 0 && (
-          <div>
-            Testando efeito
-            <div>{testingEffect[1]?.title}</div>{" "}
-            <div>{testingEffect[0]?.title}</div>
+      <button onClick={shouldFetch}>Clique para fazer a busca</button>
+      <Suspense
+        fallback={
+          <div
+            style={{ background: "#f6f6f6", color: "black", fontSize: "24px" }}
+          >
+            Loading...
           </div>
-        )}
+        }
+      >
+        <FetchedCats shouldFetch={ok} setOk={setOk} />
       </Suspense>
     </div>
   );

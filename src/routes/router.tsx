@@ -8,6 +8,7 @@ import {
 import GenericErrorPage from "@/errors/GenericErrorPage";
 import Home from "@/app/home/Home";
 import Login from "@/app/login/Login";
+import Copyright from "@/app/login/Copyright";
 
 //there are 4 types of routers in react-router-dom that uses new data API's (still doesnt support react-native)
 //createBrowserRouter, createHashRouter, createMemoryRouter, createStaticRouter
@@ -33,7 +34,7 @@ export const router = createBrowserRouter(
           // }}
           // <Route path="/project/task?/:taskId" />
 
-          element={<Login />}
+          element={<Login CopyrightComponent={Copyright} />}
           errorElement={<GenericErrorPage />}
         />
       </Route>
